@@ -169,6 +169,14 @@ vector<string> LinuxParser::CpuUtilization() {
    return jiffies;
 }
 
+//Read and return CPU utilization of processes
+float LinuxParser::CpuUtilization(int pid) {
+  string line, notRelevant;
+  long total_time = LinuxParser::ActiveJiffies(pid);
+  long seconds =  LinuxParser::UpTime(pid);
+  
+  return float(total_time/seconds); }
+
 // Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   int total = 0;
